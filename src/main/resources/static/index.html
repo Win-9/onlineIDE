@@ -16,23 +16,25 @@
 
         <div class="header"> Online IDE</div>
         <div class="control-panel">
-            Select Language:
+            Select Language
         &nbsp; &nbsp;
-            <select id="languages" class="languages" onchange="changeLanguage()">
-                <option value="C">C</option>
-                <option value="CPP">C++</option>
-                <option value="Java">Java</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="Python">Python</option>
-                <option value="PHP">PHP</option>
+            <div class = "selBox">
+                <select id="languages" class="languages" onchange="changeLanguage()">
+                    <option value="C">C</option>
+                    <option value="CPP">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="PHP">PHP</option>
 
-            </select>
+                </select>
+            </div>
         </div>
         <div class="editor" id="editor">editor</div>
         <div class="button-container">
             <button class="btn" onclick="excuteCode()">Run!</button>
         </div>
-        <div class="output"></div>
+        <div class="output">output</div>
 
     </body>
 </html>
