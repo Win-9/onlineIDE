@@ -1,4 +1,4 @@
-package com.example.onlineide.home;
+package com.example.onlineide.controller.home;
 
 
 import lombok.extern.slf4j.Slf4j;
