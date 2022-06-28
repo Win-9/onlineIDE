@@ -9,20 +9,17 @@ window.onload = function (){
 function changeLanguage(){
     let language = $("#languages").val();
 
-    if (language == 'C' || language == 'CPP'){
+    if (language == 'c' || language == 'cpp'){
         editor.session.setMode("ace/mode/c_cpp");
     }
-    else if(language == 'Java'){
+    else if(language == 'java'){
         editor.session.setMode("ace/mode/java");
     }
-    else if(language == 'JavaScript'){
+    else if(language == 'js'){
         editor.session.setMode("ace/mode/javascript");
     }
-    else if(language == 'Python'){
+    else if(language == 'py'){
         editor.session.setMode("ace/mode/python");
-    }
-    else if(language == 'PHP'){
-        editor.session.setMode("ace/mode/php");
     }
 }
 
