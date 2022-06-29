@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.*;
 import java.util.UUID;
@@ -15,15 +17,18 @@ import java.util.UUID;
 public class Compile {
 
     @PostMapping("/compile.java")
-    public void compile(@ModelAttribute Code code) throws IOException {
+    @ResponseBody
+    public String compile(@ModelAttribute Code code) throws IOException {
         log.info("lang = {}", code.getLanguage());
         log.info("code = {}", code.getCode());
 
-        String filePath = "src/main/java/com/example/onlineide/file/" + UUID.randomUUID();
-        String lowLang = code.getLanguage().toLowerCase();
+        String fileName = String.valueOf(UUID.randomUUID()); //고유한 UUID
+        String filePath = "src/main/java/com/example/onlineide/file/" + fileName;// 새로 생성될 파일경로
+        String lowLang = code.getLanguage().toLowerCase(); // 언어종류
 
         registFile(code.getCode(),lowLang, filePath);
-        System.out.println(compileCode(lowLang, filePath));
+
+        return compileCode(lowLang, filePath, fileName);
     }
 
     public void registFile(String code, String lowLang, String filePath){
@@ -39,12 +44,16 @@ public class Compile {
         }
     }
 
-    public String compileCode(String language, String filePath) throws IOException {
+    public String compileCode(String language, String filePath, String fileName) throws IOException {
         Process process = null;
         StringBuilder result = new StringBuilder();
 
-        if (language.equals("c") || language.equals("cpp")){
-            process =  new ProcessBuilder("C:\\MinGW\\bin\\gcc.exe"+" -o"
+        if (language.equals("c")){
+            process =  new ProcessBuilder("C:\\MinGW\\bin\\gcc.exe"
+                    ,"-o", fileName+" "+filePath+"."+language).start();
+        }
+        else if(language.equals("cpp")){
+            process =  new ProcessBuilder("C:\\MinGW\\bin\\g++.exe"
                     ,filePath+"."+language).start();
         }
         else if(language.equals("java")){
@@ -59,6 +68,7 @@ public class Compile {
             process =  new ProcessBuilder("C:\\Python310\\python.exe"
                     ,filePath+"."+language).start();
         }
+
 
         BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
         for (String line = null; (line = br.readLine()) != null;)
