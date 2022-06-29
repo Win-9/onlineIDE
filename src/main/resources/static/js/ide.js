@@ -34,7 +34,7 @@ function excuteCode(){
         },
 
         success: function (response){
-            $(".output").text(response)
+            $(".output").text(response);
         }
     })
 }
