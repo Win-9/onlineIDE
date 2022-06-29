@@ -1,6 +1,7 @@
 *{margin: 0;}
 .body{
     background: #373938;
+    width: 100%;
 }
 .header {
     background: #373938;
@@ -53,11 +54,12 @@
 }
 
 .output {
+    color: #1FFF69;
     padding: 4px;
     border-top: 2px solid gray;
-    min-height: 100px;
     width: 100%;
+    height: 30%;
+    min-height: 150px;
     resize: none;
     background: #373938;
-
 }
