@@ -2,23 +2,38 @@ package com.example.onlineide.service;
 
 import com.example.onlineide.dto.Code;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class Generate {
 
     public String separate(String plainCode,String filePath, String plainLowLang) throws IOException {
         String code = plainCode;
 
-        String fileName = String.valueOf(UUID.randomUUID()); //고유한 UUID
+        String fileName = null;
         String lowLang = plainLowLang.toLowerCase(); // 언어종류
 
-        registFile(code,lowLang, filePath);
+        log.info("code = {}", plainCode);
 
+        if (!lowLang.equals("java")){
+            fileName = String.valueOf(UUID.randomUUID());//파일이름은 고유한 UUID
+        }
+        else{
+            String[]str = code.split(" ");
+            StringBuilder sb = new StringBuilder(str[2]);
+
+            fileName = sb.delete(sb.length() - 3, sb.length()).toString();
+            log.info("fileName = {}", fileName);
+            log.info("fullPath = {}", filePath + fileName+"."+lowLang);
+        }
+        registFile(code,lowLang, filePath + fileName);
         return compileCode(lowLang, filePath, fileName);
     }
 
@@ -64,6 +79,7 @@ public class Generate {
         BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
         for (String line = null; (line = br.readLine()) != null;)
             result.append(line);
+        log.info("result = {}", result);
         return result.toString();
     }
 }

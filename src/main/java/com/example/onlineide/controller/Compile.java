@@ -25,9 +25,8 @@ public class Compile {
     public String compile(@ModelAttribute Code code) throws IOException {
         log.info("compile controller");
 
-        String fileName = String.valueOf(UUID.randomUUID()); //고유한 UUID
-        String filePath = "src/main/java/com/example/onlineide/file/" + fileName;// 새로 생성될 파일경로
+        String filePath = "src/main/java/com/example/onlineide/file/";// 새로 생성될 파일경로
 
-        return generate.separate(String.valueOf(UUID.randomUUID()), filePath+fileName, code.getLanguage());
+        return generate.separate(code.getCode(), filePath, code.getLanguage());
     }
 }
