@@ -56,23 +56,23 @@ public class Generate {
 
         if (language.equals("c")){
             process =  new ProcessBuilder("C:\\MinGW\\bin\\gcc.exe"
-                    ,"-o", fileName+" "+filePath+"."+language).start();
+                    ,"-o", filePath+fileName+" "+filePath+"."+language).start();
         }
         else if(language.equals("cpp")){
             process =  new ProcessBuilder("C:\\MinGW\\bin\\g++.exe"
-                    ,filePath+"."+language).start();
+                    ,filePath+fileName+"."+language).start();
         }
         else if(language.equals("java")){
             process =  new ProcessBuilder("C:\\Program Files\\Java\\jdk-11.0.10\\bin\\javaw.exe"
-                    ,filePath+"."+language).start();
+                    ,filePath+fileName+"."+language).start();
         }
         else if(language.equals("js")){
             process =  new ProcessBuilder("C:\\Program Files\\nodejs\\node.exe"
-                    ,filePath+"."+language).start();
+                    ,filePath+fileName+"."+language).start();
         }
         else if(language.equals("py")){
             process =  new ProcessBuilder("C:\\Python310\\python.exe"
-                    ,filePath+"."+language).start();
+                    ,filePath+fileName+"."+language).start();
         }
 
 
