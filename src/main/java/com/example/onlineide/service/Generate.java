@@ -4,13 +4,14 @@ import com.example.onlineide.dto.Code;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Component
+@Service
 @Slf4j
 public class Generate {
 
