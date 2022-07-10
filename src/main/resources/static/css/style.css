@@ -1,5 +1,5 @@
 *{margin: 0;}
-.body{
+body{
     background: #373938;
     width: 100%;
 }
@@ -62,4 +62,23 @@
     min-height: 150px;
     resize: none;
     background: #373938;
+}
+.login{
+    border: 1px solid #1FFF69;
+    border-radius: 3px;
+    float: left;
+    width: 10%;
+    text-align: center;
+}
+a:link {
+    text-decoration: none;
+    color: #1FFF69;
+}
+a:visited {
+    text-decoration: none;
+    color: #1FFF69;
+}
+
+.login-form{
+    color: #1FFF69;
 }
