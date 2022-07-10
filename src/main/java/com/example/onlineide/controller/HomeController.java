@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String home(){
-      log.info("home:{}", "home-controller");
+    public String home() {
+        log.info("home:{}", "home-controller");
 
-      return "home";
+        return "home";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login/login";
     }
 }
