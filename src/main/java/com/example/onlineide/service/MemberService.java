@@ -26,15 +26,8 @@ public class MemberService {
         }
     }
 
-    public void login(Member member){
-        Member findMember = memberRepository.findOne(member.getId());
-        if (!findMember.getId().equals(member.getId())) {
-            throw new IllegalStateException("not exit ID");
-        }
-
-        if (!findMember.equals(member.getPassword())){
-            throw new IllegalStateException("password is not match");
-        }
+    public Member findMember(String id){
+        return memberRepository.findOne(id);
     }
 
 }
