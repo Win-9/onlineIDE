@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class LoginForm {
     private String id;
-    private String passWord;
+    private String password;
 }

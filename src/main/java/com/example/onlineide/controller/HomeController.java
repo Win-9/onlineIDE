@@ -7,6 +7,7 @@ import com.example.onlineide.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,31 +31,40 @@ public class HomeController {
     }
 
     @GetMapping("/signIn")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("loginForm",new LoginForm());
         return "/login/signIn";
     }
 
     @PostMapping("/signIn")
     public String loginMember(@ModelAttribute LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request){
 
-        HttpSession session = request.getSession(false);
-
-
         if (bindingResult.hasErrors()) {
             return "/login/signIn";
         }
 
-        Member findMember = memberService.findMember(loginForm.getId());
-        if (findMember == null){
-            throw new IllegalStateException("not exit ID");
+        log.info("loginFormId = {}", loginForm.getId());
+        /**
+         * 로그인 실패
+         */
+        Member loginMember = memberService.findMember(loginForm.getId());
+        if (loginMember == null){
+            bindingResult.reject("login fail","ID doesn't exit");
+            return "/login/signIn";
         }
 
-        if (!(findMember.getPassword()).equals(loginForm.getPassWord())){
-            throw new IllegalStateException("password is not match");
+        if (!(loginMember.getPassword()).equals(loginForm.getPassword())){
+            bindingResult.reject("login fail","password doesn't match");
+            return "/login/signIn";
         }
 
-        session.setAttribute("member", loginForm);
+        /**
+         * 로그인 성공
+         */
+        HttpSession session = request.getSession(true); //세션이 존재하지 않으면 신규세션 생성
+        session.setAttribute("member", loginMember);
 
-        return "redirect:/ide";
+
+        return "redirect:/ide"; // 성공시 ide 이용
     }
 }

@@ -1,16 +1,20 @@
 package com.example.onlineide.controller;
 
 
+import com.example.onlineide.domain.Member;
 import com.example.onlineide.dto.Code;
 import com.example.onlineide.service.GenerateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 
 @Controller
@@ -21,7 +25,20 @@ public class CompileController {
 
 
     @GetMapping("/ide")
-    public String ide(){
+    public String ide(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession(false);
+        if (session == null) { // 빈세션
+            return "error";
+        }
+
+        Member loginMember = (Member) session.getAttribute("member");
+
+        if (loginMember == null) { // 빈객체
+            return "error";
+        }
+
+        model.addAttribute("member", loginMember);
+
         return "ide/ide";
     }
 
