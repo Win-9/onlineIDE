@@ -12,7 +12,9 @@
         <div class="header"> Online IDE</div>
         <div class="control-panel">
             Select Language
-        &nbsp; &nbsp; <a href="/login"><div class="login">Log In</div></a>
+            <div class ="name">Welcome! <span th:text="${member.name}">사용자이름</span></div>
+            <br>
+            <a href="/logout"><div class="logout">Log out</div></a>
 
             <div class = "selBox">
                 <select id="languages" class="languages" onchange="changeLanguage()">

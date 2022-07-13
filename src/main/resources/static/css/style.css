@@ -63,13 +63,21 @@ body{
     resize: none;
     background: #373938;
 }
-.login{
+.logout{
     border: 1px solid #1FFF69;
     border-radius: 3px;
     float: left;
     width: 10%;
     text-align: center;
+    display: block;
 }
+
+.name{
+    float: left;
+    width: 10%;
+    display: block;
+}
+
 a:link {
     text-decoration: none;
     color: #1FFF69;
