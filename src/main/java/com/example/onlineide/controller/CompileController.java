@@ -25,7 +25,7 @@ public class CompileController {
 
 
     @GetMapping("/ide")
-    public String ide(HttpServletRequest request, Model model){
+    public String ide(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if (session == null) { // 빈세션
             return "error";
@@ -50,5 +50,17 @@ public class CompileController {
         String filePath = "src/main/java/com/example/onlineide/file/";// 새로 생성될 파일경로
 
         return generateService.separate(code.getCode(), filePath, code.getLanguage());
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false); // 새 세션생성 x
+
+        log.info("logout-controller");
+
+        session.invalidate();
+
+
+        return "redirect:/";
     }
 }

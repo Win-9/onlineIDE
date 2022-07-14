@@ -30,13 +30,13 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/signIn")
+    @GetMapping("/sign-in")
     public String login(Model model){
         model.addAttribute("loginForm",new LoginForm());
         return "/login/signIn";
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/sign-in")
     public String loginMember(@ModelAttribute LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request){
 
         if (bindingResult.hasErrors()) {
@@ -62,6 +62,7 @@ public class HomeController {
          * 로그인 성공
          */
         HttpSession session = request.getSession(true); //세션이 존재하지 않으면 신규세션 생성
+        session.setMaxInactiveInterval(600);
         session.setAttribute("member", loginMember);
 
 
