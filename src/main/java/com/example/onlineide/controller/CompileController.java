@@ -2,7 +2,7 @@ package com.example.onlineide.controller;
 
 
 import com.example.onlineide.domain.Member;
-import com.example.onlineide.dto.Code;
+import com.example.onlineide.dto.CodeDto;
 import com.example.onlineide.service.GenerateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ public class CompileController {
 
     @PostMapping("/compile.java")
     @ResponseBody
-    public String compile(@ModelAttribute Code code) throws IOException {
+    public String compile(@ModelAttribute CodeDto code) throws IOException {
         log.info("compile controller");
 
         String filePath = "src/main/java/com/example/onlineide/file/";// 새로 생성될 파일경로

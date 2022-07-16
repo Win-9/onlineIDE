@@ -40,6 +40,7 @@ public class TestDB {
             member.setId("test1234");
             member.setPassword("1234");
 
+            member.createOwnDirectory();
             em.persist(member);
         }
 
