@@ -3,10 +3,10 @@ package com.example.onlineide.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +20,16 @@ public class Member {
     @Embedded
     private Address address;
     private String email;
+
+    private String ownPath;
+
+    @OneToMany(mappedBy = "member")
+    private List<UserFile> files = new ArrayList<>();
+
+    //사용자별 고유 디렉토리생성
+    public void createOwnDirectory(){
+        ownPath = "src/main/java/com/example/onlineide/userprojectfile/" + name;
+        File file = new File(ownPath);
+        file.mkdir();
+    }
 }

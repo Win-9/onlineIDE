@@ -15,6 +15,7 @@ public class MemberRepository {
 
     @Transactional
     public void saveMember(Member member){
+        member.createOwnDirectory();
         em.persist(member);
     }
 
