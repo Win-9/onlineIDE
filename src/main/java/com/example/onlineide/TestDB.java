@@ -36,7 +36,7 @@ public class TestDB {
             address.setEtc("256동71호");
 
             member.setAddress(address);
-            member.setName("긴또깡");
+            member.setName("testUserName");
             member.setId("test1234");
             member.setPassword("1234");
 
