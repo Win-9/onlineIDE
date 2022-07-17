@@ -7,10 +7,6 @@
     margin: 20px;
 }
 
-body{
-    background-color: #c0c0fe;
-}
-
 .jumbotron{
     position: absolute;
     top: 50%;
@@ -40,4 +36,28 @@ body{
 p{
     text-align: center;
     font-weight: bold;
+}
+
+.create-controller{
+    min-height: 70%;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+/*scroll-bar cumtom*/
+.create-controller::-webkit-scrollbar{
+    width: 8px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.create-controller::-webkit-scrollbar-thumb{
+    width: 8px;
+    background-color: #1FFF69;
+    border-radius: 10px;
+}
+/*scroll-bar cumtom*/
+
+.exist-controller .btn{
+    text-align: center;
 }
