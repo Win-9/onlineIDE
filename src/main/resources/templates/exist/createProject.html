@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header :: header">
+
+    <meta charset="UTF-8">
+    <title>Online Ide</title>
+
+</head>
+<body>
+<div class="jumbotron">
+    <h2 class="h2"># Online IDE</h2>
+    <hr>
+    <form class="login-form" role="form" action="/new-project" method="post" th:object="${createProjectForm}">
+
+        <div class="form-group">
+            <label th:for="projectName">Project Name</label>
+            <input type="text" th:field="*{projectName}" class="form-control" placeholder="write your project name">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create!</button>
+    </form>
+
+    <p>You can Use "NOT BAD" Service</p>
+</div>
+<div th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

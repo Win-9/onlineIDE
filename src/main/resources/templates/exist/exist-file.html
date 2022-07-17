@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header :: header">
+
+    <meta charset="UTF-8">
+    <title>Online Ide</title>
+
+</head>
+<body>
+<div class="jumbotron exist-controller">
+    <h2 class="h2"># Online IDE</h2>
+    <hr>
+    <div class="create-controller">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <button th:object="${memberId}" class="btn btn-primary">
+        <a th:href="@{/{memberId}/new-project(memberId = ${memberId})}">Create New Project</a>
+    </button>
+    <p>You can Use "NOT BAD" Service</p>
+</div>
+<div th:replace="fragments/footer :: footer" />
+
+</body>
+</html>
