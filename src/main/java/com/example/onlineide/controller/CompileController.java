@@ -3,15 +3,12 @@ package com.example.onlineide.controller;
 
 import com.example.onlineide.domain.Member;
 import com.example.onlineide.dto.CodeDto;
-import com.example.onlineide.service.GenerateService;
+import com.example.onlineide.service.UserFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,11 +18,10 @@ import java.io.*;
 @Slf4j
 @RequiredArgsConstructor
 public class CompileController {
-    private final GenerateService generateService;
+    private final UserFileService userFileService;
 
-
-    @GetMapping("/ide")
-    public String ide(HttpServletRequest request, Model model) {
+    @GetMapping("{memberId}/ide")
+    public String ide(@PathVariable String memberId, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if (session == null) { // 빈세션
             return "error";
@@ -49,7 +45,7 @@ public class CompileController {
 
         String filePath = "src/main/java/com/example/onlineide/file/";// 새로 생성될 파일경로
 
-        return generateService.separate(code.getCode(), filePath, code.getLanguage());
+        return userFileService.separate(code.getCode(), filePath, code.getLanguage());
     }
 
     @GetMapping("/logout")
