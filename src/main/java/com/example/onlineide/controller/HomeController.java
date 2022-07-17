@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,7 +38,8 @@ public class HomeController {
     }
 
     @PostMapping("/sign-in")
-    public String loginMember(@ModelAttribute LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request){
+    public String loginMember(@ModelAttribute LoginForm loginForm, BindingResult bindingResult,
+                              HttpServletRequest request, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()) {
             return "/login/signIn";
@@ -61,11 +63,14 @@ public class HomeController {
         /**
          * 로그인 성공
          */
+
+        redirectAttributes.addAttribute("memberId",loginMember.getId());
+
         HttpSession session = request.getSession(true); //세션이 존재하지 않으면 신규세션 생성
         session.setMaxInactiveInterval(600);
         session.setAttribute("member", loginMember);
 
 
-        return "redirect:/ide"; // 성공시 ide 이용
+        return "redirect:/{memberId}/list"; // 성공시 ide 이용
     }
 }
