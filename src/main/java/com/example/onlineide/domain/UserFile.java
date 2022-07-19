@@ -6,10 +6,9 @@ import java.io.File;
 @Entity
 public class UserFile {
 
-    @Id @GeneratedValue
+    @Id
     @Column(name = "FILE_ID")
-    private Long id;
-    private String subPath;
+    private String fileName;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
@@ -19,12 +18,12 @@ public class UserFile {
     private Code code;
 
 
-    public String getSubPath() {
-        return subPath;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setSubPath(String subPath) {
-        this.subPath = subPath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     //편의메소드
@@ -34,7 +33,7 @@ public class UserFile {
     }
 
     public void registerProject(){
-        String path = member.getOwnPath() + "/" + subPath;
+        String path = member.getOwnPath() + "/" + fileName;
         File file = new File(path);
         file.mkdir();
     }

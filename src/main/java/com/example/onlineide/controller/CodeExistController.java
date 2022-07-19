@@ -7,17 +7,20 @@ import com.example.onlineide.dto.CreateProjectFormDto;
 import com.example.onlineide.service.MemberService;
 import com.example.onlineide.service.UserFileService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class CodeExistController {
     private final UserFileService userFileService;
     private final MemberService memberService;
@@ -45,20 +48,24 @@ public class CodeExistController {
      * post받고 ide서비스 이용
      * */
     @PostMapping("/{memberId}/new-project")
-    public String receiveCreateNewProject(@ModelAttribute CreateProjectFormDto form, Model model){
+    public String receiveCreateNewProject(@ModelAttribute CreateProjectFormDto form, Model model,
+                                          RedirectAttributes redirectAttributes){
         String memberId = form.getMemberId();
         Member findMember = memberService.findMember(memberId);
 
         String projectName = form.getProjectName();
+        redirectAttributes.addAttribute("projectName",projectName);
+
+        log.info("name = {}", projectName);
 
         UserFile userFile = new UserFile();
+        userFile.setFileName(projectName);
         userFile.setMember(findMember);
-        userFile.setSubPath(projectName);
         userFile.registerProject();
 
         userFileService.save(userFile);
 
-        return "redirect:{memberId}/ide";
+        return "redirect:/{memberId}/{projectName}/ide";
     }
 
 }

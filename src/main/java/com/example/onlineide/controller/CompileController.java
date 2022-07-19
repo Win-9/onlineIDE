@@ -2,6 +2,7 @@ package com.example.onlineide.controller;
 
 
 import com.example.onlineide.domain.Member;
+import com.example.onlineide.domain.UserFile;
 import com.example.onlineide.dto.CodeDto;
 import com.example.onlineide.service.UserFileService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,9 @@ import java.io.*;
 public class CompileController {
     private final UserFileService userFileService;
 
-    @GetMapping("{memberId}/ide")
-    public String ide(@PathVariable String memberId, HttpServletRequest request, Model model) {
+    @GetMapping("{memberId}/{projectName}/ide")
+    public String ide(@PathVariable String memberId, String projectName,
+                      HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if (session == null) { // 빈세션
             return "error";
@@ -40,10 +42,16 @@ public class CompileController {
 
     @PostMapping("/compile.java")
     @ResponseBody
-    public String compile(@ModelAttribute CodeDto code) throws IOException {
+    public String compile(@ModelAttribute CodeDto code, Model model) throws IOException {
         log.info("compile controller");
 
-        String filePath = "src/main/java/com/example/onlineide/file/";// 새로 생성될 파일경로
+        Member member = (Member) model.getAttribute("member");
+        log.info("memberName = {}", member.getName());
+
+        UserFile userFile = (UserFile) model.getAttribute("userFile");
+        log.info("userFileName = {}", userFile.getFileName());
+        String filePath = "src/main/java/com/example/onlineide/userprojectfile/" + userFile.getFileName() + "/";// 새로 생성될 파일경로
+
 
         return userFileService.separate(code.getCode(), filePath, code.getLanguage());
     }
