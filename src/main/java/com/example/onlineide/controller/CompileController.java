@@ -3,7 +3,7 @@ package com.example.onlineide.controller;
 
 import com.example.onlineide.domain.Member;
 import com.example.onlineide.domain.UserFile;
-import com.example.onlineide.dto.CodeDto;
+import com.example.onlineide.dto.IdeCodeDto;
 import com.example.onlineide.service.UserFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class CompileController {
     private final UserFileService userFileService;
 
     @GetMapping("{memberId}/{projectName}/ide")
-    public String ide(@PathVariable String memberId, String projectName,
+    public String ide(@PathVariable String memberId, @PathVariable String projectName,
                       HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if (session == null) { // 빈세션
@@ -35,22 +35,27 @@ public class CompileController {
             return "error";
         }
 
+        log.info("fileName = {}", projectName);
+
         model.addAttribute("member", loginMember);
+        model.addAttribute("projectName", projectName);
 
         return "ide/ide";
     }
 
     @PostMapping("/compile.java")
     @ResponseBody
-    public String compile(@ModelAttribute CodeDto code, Model model) throws IOException {
+    public String compile(@ModelAttribute IdeCodeDto code, Model model) throws IOException {
         log.info("compile controller");
 
-        Member member = (Member) model.getAttribute("member");
-        log.info("memberName = {}", member.getName());
+        String projectName = code.getProjectName();
+        log.info("fileName = {}", projectName);
 
-        UserFile userFile = (UserFile) model.getAttribute("userFile");
-        log.info("userFileName = {}", userFile.getFileName());
-        String filePath = "src/main/java/com/example/onlineide/userprojectfile/" + userFile.getFileName() + "/";// 새로 생성될 파일경로
+        UserFile findFile = userFileService.findByFileName(projectName);
+
+//        log.info("fileName = {}", findFile.getFileName());
+
+        String filePath = "src/main/java/com/example/onlineide/userprojectfile/" + findFile.getFileName() + "/";// 새로 생성될 파일경로
 
 
         return userFileService.separate(code.getCode(), filePath, code.getLanguage());

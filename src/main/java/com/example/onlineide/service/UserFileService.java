@@ -21,8 +21,8 @@ public class UserFileService {
         userFileRepository.save(userFile);
     }
 
-    public void findByFileName(String fileName){
-        userFileRepository.findOne(fileName);
+    public UserFile findByFileName(String fileName){
+        return userFileRepository.findOne(fileName);
     }
 
     public List<UserFile> getAllFiles(String memberId){

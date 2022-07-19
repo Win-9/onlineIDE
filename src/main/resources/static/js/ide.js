@@ -30,7 +30,8 @@ function excuteCode(){
 
         data: {
             language: $("#languages").val(),
-            code: editor.getSession().getValue()
+            code: editor.getSession().getValue(),
+            projectName: $("#projectName").text()
         },
 
         success: function (response){
