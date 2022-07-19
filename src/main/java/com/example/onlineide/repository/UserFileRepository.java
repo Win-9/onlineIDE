@@ -22,6 +22,10 @@ public class UserFileRepository {
         em.persist(userFile);
     }
 
+    public UserFile findOne(String fileName) {
+        return em.find(UserFile.class, fileName);
+    }
+
     public List<UserFile> getAllFiles(String memberId){
         return em.createQuery("select u from UserFile u where u.member.id =: memberId", UserFile.class)
                 .setParameter("memberId", memberId)
