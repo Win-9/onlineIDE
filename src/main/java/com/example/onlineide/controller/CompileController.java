@@ -1,6 +1,8 @@
 package com.example.onlineide.controller;
 
 
+import com.example.onlineide.domain.Code;
+import com.example.onlineide.domain.LangStatus;
 import com.example.onlineide.domain.Member;
 import com.example.onlineide.domain.UserFile;
 import com.example.onlineide.dto.IdeCodeDto;
@@ -52,11 +54,22 @@ public class CompileController {
         log.info("fileName = {}", projectName);
 
         UserFile findFile = userFileService.findByFileName(projectName);
+        String memberName = findFile.getMember().getName();
 
 //        log.info("fileName = {}", findFile.getFileName());
 
-        String filePath = "src/main/java/com/example/onlineide/userprojectfile/" + findFile.getFileName() + "/";// 새로 생성될 파일경로
+        String filePath = "src/main/java/com/example/onlineide/userprojectfile/"
+                + memberName + "/" + findFile.getFileName() + "/";// 새로 생성될 파일경로
 
+
+        findFile.setCode(new Code(code.getCode(), code.getLanguage()));
+
+        if (code.getCode().equals("js")){
+            findFile.setLangStatus(LangStatus.JavaScript);
+        }
+        else{
+            findFile.setLangStatus(LangStatus.Python);
+        }
 
         return userFileService.separate(code.getCode(), filePath, code.getLanguage());
     }
