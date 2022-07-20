@@ -17,6 +17,9 @@ public class UserFile {
     @Embedded
     private Code code;
 
+    @Enumerated(EnumType.STRING)
+    private LangStatus langStatus;
+
 
     public String getFileName() {
         return fileName;
@@ -24,6 +27,26 @@ public class UserFile {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public void setCode(Code code) {
+        this.code = code;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public Code getCode() {
+        return code;
+    }
+
+    public LangStatus getLangStatus() {
+        return langStatus;
+    }
+
+    public void setLangStatus(LangStatus langStatus) {
+        this.langStatus = langStatus;
     }
 
     //편의메소드
