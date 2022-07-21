@@ -82,7 +82,6 @@ public class CompileController {
 
         session.invalidate();
 
-
         return "redirect:/";
     }
 }

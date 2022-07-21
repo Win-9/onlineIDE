@@ -28,7 +28,16 @@ public class CodeExistController {
 
     @GetMapping("/{memberId}/list")
     public String memberOwnList(@PathVariable String memberId, Model model){
+
+        log.info("memberId = {}", memberId);
+
         List<UserFile> files = userFileService.getAllFiles(memberId);
+
+        System.out.println("=====here=====");
+
+        for (UserFile file : files) {
+            log.info("file.getFileName() = {}",file.getFileName());
+        }
 
         model.addAttribute("memberFiles", files);
         model.addAttribute("memberId", memberId);
