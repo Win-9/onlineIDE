@@ -15,9 +15,16 @@
             <thead>
             <tr>
                 <th>Project Name</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
+            <tr th:each="file : ${memberFiles}">
+                <td th:text="${file.fileName}"></td>
+                <td>
+                    <a th:href = "@{/{memberId}/{fileName}/ide(memberId = ${memberId}, fileName = ${file.fileName})}" class="btn">Start</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

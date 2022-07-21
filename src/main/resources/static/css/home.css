@@ -40,6 +40,7 @@ p{
 
 .create-controller{
     min-height: 70%;
+    max-height: 70%;
     overflow-y: scroll;
     text-align: center;
 }
