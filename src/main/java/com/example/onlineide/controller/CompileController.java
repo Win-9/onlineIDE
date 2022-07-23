@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.Scanner;
 
 @Controller
 @Slf4j
@@ -25,7 +26,7 @@ public class CompileController {
 
     @GetMapping("{memberId}/{projectName}/ide")
     public String ide(@PathVariable String memberId, @PathVariable String projectName,
-                      HttpServletRequest request, Model model) {
+                      HttpServletRequest request, Model model) throws FileNotFoundException {
         HttpSession session = request.getSession(false);
         if (session == null) { // 빈세션
             return "error";
@@ -37,12 +38,37 @@ public class CompileController {
             return "error";
         }
 
+        File findFile = getFileList(memberId, projectName);
+
+        if (findFile != null) {
+            StringBuilder sb = new StringBuilder();
+            Scanner scan = new Scanner(findFile);
+            while(scan.hasNextLine()){
+                sb.append(scan.nextLine());
+            }
+
+            model.addAttribute("code", sb.toString());
+        }
+
         log.info("fileName = {}", projectName);
 
         model.addAttribute("member", loginMember);
         model.addAttribute("projectName", projectName);
 
         return "ide/ide";
+    }
+
+    private File getFileList(String memberId, String projectName) {
+        String filePath = "src/main/java/com/example/onlineide/userprojectfile/"
+                + memberId + "/" + projectName + "/";
+        File file = new File(filePath);
+        File[] files = file.listFiles();
+        if (files == null){
+            return null;
+        }
+        log.info("fileName = {}", files[0].getName());
+
+        return files[0];
     }
 
     @PostMapping("/compile.java")
