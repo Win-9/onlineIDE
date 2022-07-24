@@ -39,18 +39,19 @@ public class CompileController {
         }
 
         File findFile = getFileList(memberId, projectName);
+        StringBuilder sb = new StringBuilder();
 
         if (findFile != null) {
-            StringBuilder sb = new StringBuilder();
             Scanner scan = new Scanner(findFile);
             while(scan.hasNextLine()){
                 sb.append(scan.nextLine());
             }
-
-            model.addAttribute("code", sb.toString());
         }
 
-        log.info("fileName = {}", projectName);
+        log.info("code = {}", sb);
+
+        model.addAttribute("code", sb.toString());
+
 
         model.addAttribute("member", loginMember);
         model.addAttribute("projectName", projectName);
@@ -91,12 +92,12 @@ public class CompileController {
         log.info("fileName = {}", projectName);
 
         UserFile findFile = userFileService.findByFileName(projectName);
-        String memberName = findFile.getMember().getName();
+        String memberId = findFile.getMember().getId();
 
 //        log.info("fileName = {}", findFile.getFileName());
 
-        String filePath = "src/main/java/com/example/onlineide/userprojectfile/"
-                + memberName + "/" + findFile.getFileName() + "/";// 새로 생성될 파일경로
+        String filePath = "src/main/resources/userprojectfile/"
+                + memberId + "/" + findFile.getFileName() +"/";// 새로 생성될 파일경로
 
 
         findFile.setCode(new Code(code.getCode(), code.getLanguage()));
