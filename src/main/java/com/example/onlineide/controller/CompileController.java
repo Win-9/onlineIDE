@@ -59,11 +59,22 @@ public class CompileController {
     }
 
     private File getFileList(String memberId, String projectName) {
-        String filePath = "src/main/java/com/example/onlineide/userprojectfile/"
-                + memberId + "/" + projectName + "/";
-        File file = new File(filePath);
-        File[] files = file.listFiles();
-        if (files == null){
+        String filePath = "src/main/resources/userprojectfile/"
+                + memberId + "/" + projectName;
+        String path2 = "src/main/resources/userprojectfile/" + memberId;
+        log.info("path = {}", filePath);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        File dir = new File(filePath);
+        File[] files = dir.listFiles();
+
+        if (files.length == 0){
+            log.info("fileName null");
             return null;
         }
         log.info("fileName = {}", files[0].getName());

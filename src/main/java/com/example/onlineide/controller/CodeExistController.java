@@ -74,6 +74,12 @@ public class CodeExistController {
 
         userFileService.save(userFile);
 
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return "redirect:/{memberId}/{projectName}/ide";
     }
 
