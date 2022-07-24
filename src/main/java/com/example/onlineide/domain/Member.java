@@ -28,7 +28,7 @@ public class Member {
 
     //사용자별 고유 디렉토리생성
     public void createOwnDirectory(){
-        ownPath = "src/main/java/com/example/onlineide/userprojectfile/" + name;
+        ownPath = "src/main/resources/userprojectfile/" + id;
         File file = new File(ownPath);
         file.mkdir();
     }
