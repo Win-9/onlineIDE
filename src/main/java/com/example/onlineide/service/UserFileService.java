@@ -70,15 +70,15 @@ public class UserFileService {
         StringBuilder result = new StringBuilder();
 
         if(language.equals("java")){
-            process =  new ProcessBuilder("src/main/java/com/example/onlineide/compiler/javaw.exe"
+            process =  new ProcessBuilder("src/main/resources/compiler/javaw.exe"
                     ,filePath+fileName+"."+language).start();
         }
         else if(language.equals("js")){
-            process =  new ProcessBuilder("src/main/java/com/example/onlineide/compiler/node.exe"
+            process =  new ProcessBuilder("src/main/resources/compiler/node.exe"
                     ,filePath+fileName+"."+language).start();
         }
         else if(language.equals("py")){
-            process =  new ProcessBuilder("src/main/java/com/example/onlineide/compiler/python.exe"
+            process =  new ProcessBuilder("src/main/resources/compiler/python.exe"
                     ,filePath+fileName+"."+language).start();
         }
 

@@ -74,7 +74,8 @@ public class CompileController {
         File dir = new File(filePath);
         File[] files = dir.listFiles();
 
-        if (files.length == 0){
+
+        if (files == null || files.length == 0){
             log.info("fileName null");
             return null;
         }
