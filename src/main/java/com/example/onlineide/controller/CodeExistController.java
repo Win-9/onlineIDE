@@ -80,7 +80,7 @@ public class CodeExistController {
             e.printStackTrace();
         }
 
-        return "redirect:{memberId}/{projectName}/ide";
+        return "redirect:/{memberId}/{projectName}/ide";
     }
 
 }
