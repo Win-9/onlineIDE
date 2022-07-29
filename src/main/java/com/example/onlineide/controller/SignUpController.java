@@ -29,7 +29,7 @@ public class SignUpController {
     public String createMember(@ModelAttribute SignUpForm signUpForm, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
-            return "/error";
+            return "error";
         }
 
         Member findMember = memberService.findMember(signUpForm.getId());

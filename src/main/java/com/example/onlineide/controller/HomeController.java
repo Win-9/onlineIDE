@@ -36,7 +36,7 @@ public class HomeController {
     @GetMapping("/sign-in")
     public String login(Model model){
         model.addAttribute("loginForm",new LoginForm());
-        return "/login/signIn";
+        return "login/signIn";
     }
 
     @PostMapping("/sign-in")
@@ -44,7 +44,7 @@ public class HomeController {
                               HttpServletRequest request, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()) {
-            return "/login/signIn";
+            return "login/signIn";
         }
 
         log.info("loginFormId = {}", loginForm.getId());
@@ -54,12 +54,12 @@ public class HomeController {
         Member loginMember = memberService.findMember(loginForm.getId());
         if (loginMember == null){
             bindingResult.reject("login fail","ID doesn't exit");
-            return "/login/signIn";
+            return "login/signIn";
         }
 
         if (!(loginMember.getPassword()).equals(loginForm.getPassword())){
             bindingResult.reject("login fail","password doesn't match");
-            return "/login/signIn";
+            return "login/signIn";
         }
 
         /**
@@ -73,6 +73,6 @@ public class HomeController {
         session.setAttribute("member", loginMember);
 
 
-        return "redirect:/{memberId}/list"; // 성공시 ide 이용
+        return "redirect:{memberId}/list"; // 성공시 ide 이용
     }
 }
