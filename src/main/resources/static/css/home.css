@@ -1,0 +1,64 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+.h2{
+    margin: 20px;
+}
+
+.jumbotron{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+
+    box-shadow: 20px 20px 100px grey;
+    border-radius: 10px;
+
+    height: 70%;
+    width: 30%;
+}
+
+.home-container{
+    display: inline-block;
+    text-align: center;
+    padding: 24%;
+}
+
+.home-container button{
+    margin:4px;
+    width: 140px;
+}
+
+p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.create-controller{
+    min-height: 70%;
+    max-height: 70%;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+/*scroll-bar cumtom*/
+.create-controller::-webkit-scrollbar{
+    width: 8px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.create-controller::-webkit-scrollbar-thumb{
+    width: 8px;
+    background-color: #1FFF69;
+    border-radius: 10px;
+}
+/*scroll-bar cumtom*/
+
+.exist-controller .btn{
+    text-align: center;
+}

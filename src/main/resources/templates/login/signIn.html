@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError{
+        border-color: red;
+    }
+</style>
+<body>
+<div class="container">
+    <form class="login-form" role="form" action="/sign-in" method="post" th:object="${loginForm}">
+
+        <div class="form-group">
+            <label th:for="id">ID</label>
+            <input type="text" th:field="*{id}" class="form-control"
+                   th:class="${#fields.hasErrors('id')} ? 'form-control fieldError' : 'form-control'" placeholder="write your id">
+            <p th:if="${#fields.hasErrors('id')}" th:error="*{id}">IncorrectData</p>
+        </div>
+
+        <div class="form-group">
+            <label th:for="password">PassWord</label>
+            <input type="text" th:field="*{password}" class="form-control" placeholder="write your password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,92 @@
+*{margin: 0;}
+body{
+    background: #373938;
+    width: 100%;
+}
+.header {
+    background: #373938;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #1FFF69;
+    padding: 4px;
+    font-family: sans-serif;
+}
+
+.control-panel {
+    background: #373938;
+    text-align: right;
+    padding: 4px;
+    font-family: sans-serif;
+    color: #1FFF69;
+}
+
+.selBox select {
+    width: 150px;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 15px;
+    color:#1FFF69;
+    border: 1px solid #1FFF69;
+    border-radius: 3px;
+    margin-top: 10px;
+    background: #373938;
+}
+
+.languages {
+    background: white;
+    border: 1px solid gray;
+}
+
+#editor { height: 400px; }
+
+.button-container {
+    text-align: right;
+    padding: 4px;
+    background: #373938;
+}
+
+.btn {
+    background: black;
+    color: #1FFF69;
+    padding: 8px;
+    border: 0;
+}
+
+.output {
+    color: #1FFF69;
+    padding: 4px;
+    border-top: 2px solid gray;
+    width: 100%;
+    height: 30%;
+    min-height: 120px;
+    resize: none;
+    background: #373938;
+}
+.logout{
+    border: 1px solid #1FFF69;
+    border-radius: 3px;
+    float: left;
+    width: 10%;
+    text-align: center;
+    display: block;
+}
+
+.name{
+    float: left;
+    width: 10%;
+    display: block;
+}
+
+a:link {
+    text-decoration: none;
+    color: #1FFF69;
+}
+a:visited {
+    text-decoration: none;
+    color: #1FFF69;
+}
+
+.login-form{
+    color: #1FFF69;
+}

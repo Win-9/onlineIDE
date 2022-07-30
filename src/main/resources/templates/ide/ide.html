@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
+</head>
+    <body>
+
+        <div class="header"> Online IDE</div>
+        <div class="control-panel">
+            Select Language
+            <div class ="name">Welcome!!<span id="memberName" th:text="${member.name}">사용자이름</span>!!</div>
+
+            <div class ="name">Project: <span id="projectName" th:text="${projectName}">프로젝트이름</span></div>
+            <br>
+            <a href="/logout"><div class="logout">Log out</div></a>
+
+            <div class = "selBox">
+                <select id="languages" class="languages" onchange="changeLanguage()">
+                    <!--
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                    -->
+                    <option value="java">Java</option>
+                    <option value="js">JavaScript</option>
+                    <option value="py">Python</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="editor" id="editor" th:text="${code}"></div>
+        <div class="button-container">
+            <button class="btn" onclick="excuteCode()">Run!</button>
+        </div>
+        <div class="output"></div>
+        <div th:replace="fragments/footer :: footer" />
+
+    </body>
+</html>
